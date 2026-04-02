@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Load expression table
 df = pd.read_csv("data/GSE20437_expression.tsv", sep="\t")
@@ -71,4 +72,24 @@ plt.ylabel("Number of Genes")
 plt.title("Distribution of Gene Expression Differences")
 
 plt.savefig("notebooks/diff_distribution.png")  # ← ADD THIS HERE
+plt.show()
+
+# Add small value to avoid division issues
+df["logFC"] = np.log2((df["cancer_mean"] + 1) / (df["control_mean"] + 1))
+df["abs_diff"] = abs(df["diff"])
+
+plt.figure()
+
+# Scatter plot
+plt.scatter(df["logFC"], df["abs_diff"], alpha=0.5)
+
+plt.xlabel("Log2 Fold Change")
+plt.ylabel("Absolute Expression Difference")
+plt.title("Volcano Plot (Simplified)")
+
+# Add threshold lines (optional but nice)
+plt.axvline(x=1, linestyle="--")
+plt.axvline(x=-1, linestyle="--")
+
+plt.savefig("figures/volcano_plot.png")
 plt.show()

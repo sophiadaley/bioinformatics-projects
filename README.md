@@ -50,6 +50,12 @@ The distribution of gene expression differences shows that most genes cluster ne
 
 ![Distribution Plot](figures/diff_distribution.png)
 
+### Volcano Plot
+
+The volcano plot visualizes gene expression changes between cancer and control samples. Genes with large fold changes appear farther from zero on the x-axis.
+
+![Volcano Plot](figures/volcano_plot.png)
+
 ### Tools Used
 - Python
 - pandas
